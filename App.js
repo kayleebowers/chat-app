@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, TextInput, View, Button, Alert, TouchableOpacity, ScrollView } from "react-native";
 import { useState } from "react";
 
 const App = () => {
@@ -19,12 +19,14 @@ const App = () => {
         placeholder="Type something here"
       ></TextInput>
       <Text style={styles.textInput}>You typed: {text}</Text>
-      <Button
-        title="Save"
-        onPress={() => {
-          alertMyText();
-        }}
-      />
+      <TouchableOpacity
+        onPress={alertMyText}
+      >
+        <Text>Press here</Text>
+      </TouchableOpacity>
+      <ScrollView>
+        <Text style={{fontSize:110}}>This text is so big! And so long! You have to scroll!</Text>
+      </ScrollView>
     </View>
   );
 };
