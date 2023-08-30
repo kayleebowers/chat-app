@@ -6,18 +6,21 @@ const Start = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Hello Screen1</Text>
-      <TextInput
-        value={name}
-        onChangeText={(name) => setName(name)}
-        style={styles.textInput}
-        placeholder="Type username here"
-      />
-      <Button
-        title="Go to Screen2"
-        // pass name data to Screen2 on screen transition
-        onPress={() => navigation.navigate("Screen2", {name: name})}
-      ></Button>
+      <Text style={styles.header}>Let's Chat</Text>
+      <View style={styles.input}>
+        <TextInput
+          value={name}
+          onChangeText={(name) => setName(name)}
+          style={styles.textInput}
+          placeholder="Type username here"
+        />
+        <Text>Choose background color:</Text>
+        <Button
+          title="Start Chatting"
+          // pass name data to Screen2 on screen transition
+          onPress={() => navigation.navigate("Chat", {name: name})}
+        ></Button>
+      </View>
     </View>
   );
 };
@@ -35,6 +38,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
+  header: {
+
+  }, 
+  input: {
+    backgroundColor: "white"
+  }
 });
 
 export default Start;
