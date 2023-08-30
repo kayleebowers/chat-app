@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 
 const Screen1 = ({ navigation }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Hello Screen1</Text>
       <Button
         title="Go to Screen2"
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
     alignItems: center,
   },
 });
+
+export default Screen1;
