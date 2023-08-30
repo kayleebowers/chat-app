@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from "react-native";
 import { useState } from "react";
 
 const Start = ({ navigation }) => {
@@ -15,6 +15,20 @@ const Start = ({ navigation }) => {
           placeholder="Type username here"
         />
         <Text>Choose background color:</Text>
+        <View style={styles.colorOptions}>
+          <TouchableOpacity style={styles.colorButton}>
+            <Text>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.colorButton}>
+            <Text>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.colorButton}>
+            <Text>0</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.colorButton}>
+            <Text>0</Text>
+          </TouchableOpacity>
+        </View>
         <Button
           title="Start Chatting"
           // pass name data to Screen2 on screen transition
@@ -52,6 +66,14 @@ const styles = StyleSheet.create({
     fontWeight: 600, 
     color: "#FFFFFF", 
     backgroundColor: "#757083",
+  },
+  colorOptions: {
+    flexDirection: "row"
+  },
+  colorButton: {
+    width: "10%",
+    backgroundColor: "#090C08",
+    borderRadius: 50
   }
 });
 
