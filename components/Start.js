@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 import { useState } from "react";
 
 const Start = ({ navigation }) => {
@@ -6,36 +6,38 @@ const Start = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Let's Chat</Text>
-      <View style={styles.input}>
-        <TextInput
-          value={name}
-          onChangeText={(name) => setName(name)}
-          style={styles.textInput}
-          placeholder="Type username here"
-        />
-        <Text>Choose background color:</Text>
-        <View style={styles.colorOptions}>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
+      <ImageBackground>
+        <Text style={styles.header}>Let's Chat</Text>
+        <View style={styles.input}>
+          <TextInput
+            value={name}
+            onChangeText={(name) => setName(name)}
+            style={styles.textInput}
+            placeholder="Type username here"
+          />
+          <Text>Choose background color:</Text>
+          <View style={styles.colorOptions}>
+            <TouchableOpacity style={styles.colorButton}>
+              <Text>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.colorButton}>
+              <Text>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.colorButton}>
+              <Text>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.colorButton}>
+              <Text>0</Text>
+            </TouchableOpacity>
+          </View>
+          <Button
+            title="Start Chatting"
+            // pass name data to Screen2 on screen transition
+            onPress={() => navigation.navigate("Chat", {name: name})}
+            style={styles.startChattingButton}
+          />
         </View>
-        <Button
-          title="Start Chatting"
-          // pass name data to Screen2 on screen transition
-          onPress={() => navigation.navigate("Chat", {name: name})}
-          style={styles.startChattingButton}
-        />
-      </View>
+      </ImageBackground>
     </View>
   );
 };
