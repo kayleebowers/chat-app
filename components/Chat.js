@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useEffect } from "react";
 
-const Screen2 = ({route, navigation}) => {
+const Chat = ({route, navigation}) => {
 
-  // get name data from Screen1
+  // get name data from Start component
   const { name } = route.params;
 
   // pass name to navigation title once right after component is mounted
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen2;
+export default Chat;
