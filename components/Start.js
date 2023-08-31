@@ -59,13 +59,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textBox: {
-    border: "1px solid red",
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 15,
     height: "20%",
-    opacity: "50%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   // icon: {
   //   width: 50,
@@ -78,12 +76,14 @@ const styles = StyleSheet.create({
     fontWeight: 300, 
     color: "#757083",
     width: "100%",
-    height: "100%"
+    height: "100%",
+    borderRadius: 4
   },
   header: {
     fontSize: 45,
     fontWeight: 600,
     color: "#FFFFFF",
+    top: "-12%"
   },
   input: {
     backgroundColor: "white",
