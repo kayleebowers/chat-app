@@ -14,7 +14,7 @@ const Chat = ({route, navigation}) => {
 
   return (
     <View style={[styles.container, {backgroundColor: color}]}>
-      <Text>Hello Screen2</Text>
+      <Text style={{color: "white", fontSize: 16}}>Hello Screen2</Text>
     </View>
   );
 };
