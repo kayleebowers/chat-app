@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 
@@ -37,7 +37,7 @@ const Chat = ({route, navigation}) => {
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: color}]}>
+    <View>
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -45,9 +45,13 @@ const Chat = ({route, navigation}) => {
           _id: 1
         }}
       />
+      {/* ensure Android keyboards don't cover user input */}
+      { Platform.OS === "android" ? <KeyboardAvoidingView behavior="height" /> : null}
     </View>
   );
 };
+
+// style={{backgroundColor: color}}
 
 const styles = StyleSheet.create({
   container: {
