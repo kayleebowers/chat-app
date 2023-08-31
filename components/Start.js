@@ -73,6 +73,11 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "white",
+    height: "44%",
+    width: "88%",
+    top: "22%",
+    alignItems: "center",
+    justifyContent: "space-evenly"
   },
   startChattingButton: {
     fontSize: 16,
