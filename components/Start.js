@@ -27,18 +27,10 @@ const Start = ({ navigation }) => {
         />
         <Text>Choose background color:</Text>
         <View style={styles.colorOptions}>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.colorButton}>
-            <Text>0</Text>
-          </TouchableOpacity>
+          <TouchableOpacity style={[styles.colorButton, styles.black]}></TouchableOpacity>
+          <TouchableOpacity style={[styles.colorButton, styles.purple]}></TouchableOpacity>
+          <TouchableOpacity style={[styles.colorButton, styles.blue]}></TouchableOpacity>
+          <TouchableOpacity style={[styles.colorButton, styles.green]}></TouchableOpacity>
         </View>
         <Button
           title="Start Chatting"
@@ -76,7 +68,6 @@ const styles = StyleSheet.create({
     height: "44%",
     width: "88%",
     top: "22%",
-    alignItems: "center",
     justifyContent: "space-evenly"
   },
   startChattingButton: {
@@ -87,11 +78,25 @@ const styles = StyleSheet.create({
   },
   colorOptions: {
     flexDirection: "row",
+    marginHorizontal: 5,
   },
   colorButton: {
-    width: "10%",
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
+    marginHorizontal: 5,
+  },
+  black: {
     backgroundColor: "#090C08",
-    borderRadius: 50,
+  },
+  purple: {
+    backgroundColor: "#474056",
+  },
+  blue: {
+    backgroundColor: "#8A95A5",
+  },
+  green: {
+    backgroundColor: "#B9C6AE",
   },
 });
 
