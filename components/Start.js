@@ -15,7 +15,7 @@ const Start = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require("../img/Background Image.png")}
+      source={require("../img/Background-Image.png")}
       style={styles.bgImage}
     >
       <Text style={styles.header}>Let's Chat</Text>
