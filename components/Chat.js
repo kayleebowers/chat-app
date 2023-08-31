@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
 const Chat = ({route, navigation}) => {
-
+  // set message state
+  const [message, setMessage] = useState("");
+  
   // get name and color data from Start component
   const { name } = route.params;
   const {color} = route.params;
