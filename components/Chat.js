@@ -13,7 +13,7 @@ const Chat = ({route, navigation}) => {
   }, []);
 
   // set message state
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
   
   // set initial message following Gifted Chat message object format
   useEffect(() => {
@@ -31,9 +31,20 @@ const Chat = ({route, navigation}) => {
     ]);
   }, []);
 
+  // append new messages to messages array
+  const onSend = (newMessages) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: color}]}>
-      <Text style={{color: "white", fontSize: 16}}>Hello Screen2</Text>
+      <GiftedChat
+        messages={messages}
+        onSend={messages => onSend(messages)}
+        user={{
+          _id: 1
+        }}
+      />
     </View>
   );
 };
