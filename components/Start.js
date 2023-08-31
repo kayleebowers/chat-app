@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 import { useState } from "react";
 
@@ -19,12 +20,15 @@ const Start = ({ navigation }) => {
     >
       <Text style={styles.header}>Let's Chat</Text>
       <View style={styles.input}>
-        <TextInput
-          value={name}
-          onChangeText={(name) => setName(name)}
-          style={styles.textInput}
-          placeholder="Type username here"
-        />
+        <View style={styles.textBox}>
+          <Image source={require("../img/icon.svg")} style={styles.icon} />
+          <TextInput
+            value={name}
+            onChangeText={(name) => setName(name)}
+            style={styles.textInput}
+            placeholder="Your Name"
+          />
+        </View>
         <View style={styles.bgColorSection}>
           <Text>Choose background color:</Text>
           <View style={styles.colorOptions}>
@@ -54,12 +58,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textInput: {
-    width: "88%",
-    padding: 15,
-    borderWidth: 1,
+  textBox: {
+    border: "1px solid red",
     marginTop: 15,
     marginBottom: 15,
+    height: "20%",
+    opacity: "50%",
+  },
+  icon: {
+    width: "5%",
+    height: "5%",
+    position: "absolute",
+    zIndex: 1,
+    top: "50%"
+  },
+  textInput: {
+    borderWidth: 1,
+    fontSize: 16, 
+    fontWeight: 300, 
+    color: "#757083",
+    height: "100%"
   },
   header: {
     fontSize: 45,
