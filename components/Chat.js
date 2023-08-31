@@ -3,8 +3,9 @@ import { useEffect } from "react";
 
 const Chat = ({route, navigation}) => {
 
-  // get name data from Start component
+  // get name and color data from Start component
   const { name } = route.params;
+  const {color} = route.params;
 
   // pass name to navigation title once right after component is mounted
   useEffect(() => {
@@ -12,7 +13,7 @@ const Chat = ({route, navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: color}]}>
       <Text>Hello Screen2</Text>
     </View>
   );

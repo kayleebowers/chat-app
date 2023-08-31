@@ -12,6 +12,7 @@ import { useState } from "react";
 
 const Start = ({ navigation }) => {
   const [name, setName] = useState("");
+  const [color, setColor] = useState("");
 
   return (
     <ImageBackground
@@ -32,15 +33,15 @@ const Start = ({ navigation }) => {
         <View style={styles.bgColorSection}>
           <Text style={{fontSize: 16, fontWeight: 300, color: "#757083", marginBottom: 15}}>Choose Background Color:</Text>
           <View style={styles.colorOptions}>
-            <TouchableOpacity style={[styles.colorButton, styles.black]}></TouchableOpacity>
-            <TouchableOpacity style={[styles.colorButton, styles.purple]}></TouchableOpacity>
-            <TouchableOpacity style={[styles.colorButton, styles.blue]}></TouchableOpacity>
-            <TouchableOpacity style={[styles.colorButton, styles.green]}></TouchableOpacity>
+            <TouchableOpacity style={[styles.colorButton, styles.black]} onPress={() => setColor("#090C08")}></TouchableOpacity>
+            <TouchableOpacity style={[styles.colorButton, styles.purple]} onPress={() => setColor("#474056")}></TouchableOpacity>
+            <TouchableOpacity style={[styles.colorButton, styles.blue]} onPress={() => setColor("#8A95A5")}></TouchableOpacity>
+            <TouchableOpacity style={[styles.colorButton, styles.green]} onPress={() => setColor("#B9C6AE")}></TouchableOpacity>
           </View>
         </View>
         <Pressable
           // pass name data to Screen2 on screen transition
-          onPress={() => navigation.navigate("Chat", { name: name })}
+          onPress={() => navigation.navigate("Chat", { name: name, color: color })}
           style={styles.startChattingButton}
         >
           <Text style={{color: "#FFFFFF"}}>Start Chatting</Text>
