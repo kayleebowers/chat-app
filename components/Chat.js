@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 
 const Chat = ({route, navigation}) => {
   // get name and color data from Start component
@@ -38,6 +38,21 @@ const Chat = ({route, navigation}) => {
     ]);
   }, []);
 
+  // customize left and right side chat bubbles
+  const renderBubble = (props) => {
+    return <Bubble
+      {...props}
+      wrapperStyle={{
+        right: {
+          backgroundColor: "#000"
+        }, 
+        left: {
+          backgroundColor: "#FFF"
+        }
+      }}
+    />
+  }
+
   // append new messages to messages array
   const onSend = (newMessages) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
@@ -48,6 +63,7 @@ const Chat = ({route, navigation}) => {
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
+        renderBubble={renderBubble}
         user={{
           _id: 1
         }}
