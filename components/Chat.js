@@ -27,6 +27,13 @@ const Chat = ({route, navigation}) => {
           name: "React Native",
           avatar: "https://placeimg.com/140/140/any"
         }
+      }, 
+      // notify user of system message
+      {
+        _id: 2,
+        text: "This is a system message",
+        createdAt: new Date(),
+        system: true
       }
     ]);
   }, []);
