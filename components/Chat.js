@@ -37,7 +37,7 @@ const Chat = ({route, navigation}) => {
   };
 
   return (
-    <View>
+    <View style={[styles.container, {backgroundColor: color}]}>
       <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -51,13 +51,9 @@ const Chat = ({route, navigation}) => {
   );
 };
 
-// style={{backgroundColor: color}}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
 
