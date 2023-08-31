@@ -15,7 +15,7 @@ const Start = ({ navigation }) => {
   return (
     <ImageBackground
       source={require("../img/Background Image.png")}
-      style={[styles.bgImage, styles.container]}
+      style={styles.bgImage}
     >
       <Text style={styles.header}>Let's Chat</Text>
       <View style={styles.input}>
@@ -52,7 +52,9 @@ const Start = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  bgImage: {
+    width: "100%",
+    height: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -85,10 +87,6 @@ const styles = StyleSheet.create({
     width: "10%",
     backgroundColor: "#090C08",
     borderRadius: 50,
-  },
-  bgImage: {
-    width: "100%",
-    height: "100%",
   },
 });
 
