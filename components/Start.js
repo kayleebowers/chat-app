@@ -30,7 +30,7 @@ const Start = ({ navigation }) => {
           />
         </View>
         <View style={styles.bgColorSection}>
-          <Text>Choose background color:</Text>
+          <Text style={{fontSize: 16, fontWeight: 300, color: "#757083", marginBottom: 15}}>Choose Background Color:</Text>
           <View style={styles.colorOptions}>
             <TouchableOpacity style={[styles.colorButton, styles.black]}></TouchableOpacity>
             <TouchableOpacity style={[styles.colorButton, styles.purple]}></TouchableOpacity>
@@ -103,12 +103,12 @@ const styles = StyleSheet.create({
   },
   colorOptions: {
     flexDirection: "row",
-    marginHorizontal: 5,
+    marginRight: 5,
   },
   colorButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
     marginHorizontal: 5,
   },
   black: {
