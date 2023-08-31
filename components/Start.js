@@ -21,7 +21,7 @@ const Start = ({ navigation }) => {
       <Text style={styles.header}>Let's Chat</Text>
       <View style={styles.input}>
         <View style={styles.textBox}>
-          <Image source={require("../img/icon.svg")} style={styles.icon} />
+          {/* <Image source={require("../img/icon.svg")} style={styles.icon} /> */}
           <TextInput
             value={name}
             onChangeText={(name) => setName(name)}
@@ -64,19 +64,20 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     height: "20%",
     opacity: "50%",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  icon: {
-    width: "5%",
-    height: "5%",
-    position: "absolute",
-    zIndex: 1,
-    top: "50%"
-  },
+  // icon: {
+  //   width: 50,
+  //   height: 50,
+  //   objectFit: "cover"
+  // },
   textInput: {
     borderWidth: 1,
     fontSize: 16, 
     fontWeight: 300, 
     color: "#757083",
+    width: "100%",
     height: "100%"
   },
   header: {
