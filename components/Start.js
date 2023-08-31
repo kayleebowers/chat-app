@@ -2,7 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  Pressable,
   TextInput,
   TouchableOpacity,
   ImageBackground,
@@ -34,12 +34,13 @@ const Start = ({ navigation }) => {
             <TouchableOpacity style={[styles.colorButton, styles.green]}></TouchableOpacity>
           </View>
         </View>
-        <Button
-          title="Start Chatting"
+        <Pressable
           // pass name data to Screen2 on screen transition
           onPress={() => navigation.navigate("Chat", { name: name })}
           style={styles.startChattingButton}
-        />
+        >
+          <Text style={{color: "#FFFFFF"}}>Start Chatting</Text>
+        </Pressable>
       </View>
     </ImageBackground>
   );
@@ -76,8 +77,10 @@ const styles = StyleSheet.create({
   startChattingButton: {
     fontSize: 16,
     fontWeight: 600,
-    color: "#FFFFFF",
     backgroundColor: "#757083",
+    height: "18%",
+    alignItems: "center",
+    justifyContent: "center"
   },
   colorOptions: {
     flexDirection: "row",
