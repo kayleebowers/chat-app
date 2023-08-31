@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 
 const Chat = ({route, navigation}) => {
-  // set message state
-  const [message, setMessage] = useState("");
-  
   // get name and color data from Start component
   const { name } = route.params;
   const {color} = route.params;
@@ -13,6 +10,25 @@ const Chat = ({route, navigation}) => {
   // pass name to navigation title once right after component is mounted
   useEffect(() => {
     navigation.setOptions({title: name});
+  }, []);
+
+  // set message state
+  const [messages, setMessages] = useState("");
+  
+  // set initial message following Gifted Chat message object format
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: "Hello developer!",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any"
+        }
+      }
+    ]);
   }, []);
 
   return (
