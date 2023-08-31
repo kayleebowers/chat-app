@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     height: "44%",
     width: "88%",
     top: "22%",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     padding: "5%",
   },
   startChattingButton: {
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   colorOptions: {
     flexDirection: "row",
     marginRight: 5,
+    marginBottom: 10,
   },
   colorButton: {
     width: 45,
