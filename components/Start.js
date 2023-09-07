@@ -9,10 +9,28 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
+  Alert,
 } from "react-native";
 import { useState } from "react";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const Start = ({ navigation }) => {
+  // Initialize Firebase Authentication handler 
+  const auth = getAuth();
+
+  // enable user to sign in anonymously 
+  const userSignIn = () => {
+    signInAnonymously(auth)
+      //get result from promise with temp user data
+      .then((result) => {
+        navigation.navigate("Chat", {userID: result.user.uid});
+        Alert.alert("You signed in successfully");
+      })
+      .catch((error) => {
+        Alert.alert("We could not sign you in. Try again later");
+      })
+  }
+
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
 
