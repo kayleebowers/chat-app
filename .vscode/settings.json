@@ -3,6 +3,7 @@
         "appspot",
         "firebaseapp",
         "Firestore",
-        "Pressable"
+        "Pressable",
+        "unsub"
     ]
 }

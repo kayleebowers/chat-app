@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const Chat = ({route, navigation}) => {
   // get name and color data from Start component
@@ -16,28 +17,51 @@ const Chat = ({route, navigation}) => {
   // set message state
   const [messages, setMessages] = useState([]);
   
-  // set initial message following Gifted Chat message object format
+  // send and store messages through Firestore database
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: "Hello developer!",
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: "React Native",
-          avatar: "https://placeimg.com/140/140/any"
-        }
-      }, 
-      // notify user of system message
-      {
-        _id: 2,
-        text: "This is a system message",
-        createdAt: new Date(),
-        system: true
-      }
-    ]);
+    // make database query
+    const dbQuery = query(collection(db, "chat-app"), orderBy("createdAt", "desc"));
+
+    // get data from collection snapshot
+    const unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
+      const messages = [];
+      documentsSnapshot.forEach((document) => {
+        messages.push({
+          _id: document.id,
+          ...document.data()
+        })
+      })
+    })
+
+    // unsubscribe to prevent memory leaks
+    return () => {
+      if (unsubMessages) unsubMessages();
+    }
   }, []);
+
+
+  // set initial message following Gifted Chat message object format
+  // useEffect(() => {
+  //   setMessages([
+  //     {
+  //       _id: 1,
+  //       text: "Hello developer!",
+  //       createdAt: new Date(),
+  //       user: {
+  //         _id: 2,
+  //         name: "React Native",
+  //         avatar: "https://placeimg.com/140/140/any"
+  //       }
+  //     }, 
+  //     // notify user of system message
+  //     {
+  //       _id: 2,
+  //       text: "This is a system message",
+  //       createdAt: new Date(),
+  //       system: true
+  //     }
+  //   ]);
+  // }, []);
 
   // customize left and right side chat bubbles
   const renderBubble = (props) => {

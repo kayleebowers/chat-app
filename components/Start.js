@@ -24,6 +24,7 @@ const Start = ({ navigation }) => {
       //get result from promise with temp user data
       .then((result) => {
         if (result.user.uid) {
+          console.log(result.user);
           navigation.navigate("Chat", {userID: result.user.uid, name: name, color: color});
           Alert.alert("You signed in successfully");
         } else {
