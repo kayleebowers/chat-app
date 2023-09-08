@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from "react-native";
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { addDoc, collection, onSnapshot, query, orderBy, setDoc } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 const Chat = ({db, route, navigation}) => {
   // get name and color data from Start component
@@ -29,7 +29,8 @@ const Chat = ({db, route, navigation}) => {
         messages.push({
           _id: document.id,
           ...document.data(),
-          createdAt: new Date(document.data().createdAt.toMillis())
+          createdAt: new Date(document.data().createdAt.toMillis()),
+          avatar: "https://placeimg.com/140/140/any"
         })
       })
       setMessages(messages);
@@ -97,7 +98,8 @@ const Chat = ({db, route, navigation}) => {
         onSend={messages => onSend(messages)}
         renderBubble={renderBubble}
         user={{
-          _id: 1
+          _id: userID,
+          name: name
         }}
       />
       {/* ensure Android keyboards don't cover user input */}

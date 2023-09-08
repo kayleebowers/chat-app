@@ -8,7 +8,6 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
-  Image,
   Alert,
 } from "react-native";
 import { useState } from "react";
