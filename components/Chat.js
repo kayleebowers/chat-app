@@ -6,6 +6,7 @@ const Chat = ({route, navigation}) => {
   // get name and color data from Start component
   const { name } = route.params;
   const {color} = route.params;
+  const {userID} = route.params;
 
   // pass name to navigation title once right after component is mounted
   useEffect(() => {

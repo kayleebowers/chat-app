@@ -31,7 +31,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen name="Start" component={Start}/>
-        <Stack.Screen name="Chat" component={Chat}>
+        <Stack.Screen name="Chat">
           {props => <Chat db={db} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>

@@ -23,8 +23,12 @@ const Start = ({ navigation }) => {
     signInAnonymously(auth)
       //get result from promise with temp user data
       .then((result) => {
-        navigation.navigate("Chat", {userID: result.user.uid});
-        Alert.alert("You signed in successfully");
+        if (result.user.uid) {
+          navigation.navigate("Chat", {userID: result.user.uid, name: name, color: color});
+          Alert.alert("You signed in successfully");
+        } else {
+            Alert.alert("You are not signed in. Try again");
+        }
       })
       .catch((error) => {
         Alert.alert("We could not sign you in. Try again later");
@@ -82,10 +86,8 @@ const Start = ({ navigation }) => {
             </View>
           </View>
           <Pressable
-            // pass name data to Screen2 on screen transition
-            onPress={() =>
-              navigation.navigate("Chat", { name: name, color: color })
-            }
+            // pass name data to Chat on screen transition
+            onPress={userSignIn}
             style={styles.startChattingButton}
           >
             <Text style={{ color: "#FFFFFF" }}>Start Chatting</Text>
