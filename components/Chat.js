@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query, orderBy, setDoc } from "firebase/firestore";
 
-const Chat = ({route, navigation}) => {
+const Chat = ({db, route, navigation}) => {
   // get name and color data from Start component
   const { name } = route.params;
   const {color} = route.params;
@@ -31,7 +31,8 @@ const Chat = ({route, navigation}) => {
           ...document.data()
         })
       })
-    })
+      setMessages(messages);
+    });
 
     // unsubscribe to prevent memory leaks
     return () => {
