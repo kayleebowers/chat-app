@@ -3,6 +3,7 @@
         "appspot",
         "firebaseapp",
         "Firestore",
+        "Millis",
         "Pressable",
         "unsub"
     ]

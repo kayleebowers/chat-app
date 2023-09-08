@@ -20,7 +20,7 @@ const Chat = ({db, route, navigation}) => {
   // send and store messages through Firestore database
   useEffect(() => {
     // make database query
-    const dbQuery = query(collection(db, "chat-app"), orderBy("createdAt", "desc"));
+    const dbQuery = query(collection(db, "messages"), orderBy("createdAt", "desc"));
 
     // get data from collection snapshot
     const unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
@@ -28,7 +28,8 @@ const Chat = ({db, route, navigation}) => {
       documentsSnapshot.forEach((document) => {
         messages.push({
           _id: document.id,
-          ...document.data()
+          ...document.data(),
+          createdAt: new Date(document.data().createdAt.toMillis())
         })
       })
       setMessages(messages);
