@@ -79,10 +79,15 @@ const Chat = ({db, route, navigation}) => {
     />
   }
 
-  // append new messages to messages array
+  // add new messages to db
   const onSend = (newMessages) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
+    addDoc(collection(db, "messages"), newMessages[0]);
   };
+
+  // // append new messages to messages array
+  // const onSend = (newMessages) => {
+    // setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
+  // };
 
   return (
     <View style={[styles.container, {backgroundColor: color}]}>
