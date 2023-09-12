@@ -1,6 +1,6 @@
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -107,6 +107,11 @@ const Chat = ({db, route, navigation, isConnected}) => {
     />
   }
 
+  // only show inputToolbar with connection
+  const renderInputToolbar = (props) => {
+    (isConnected) ? <InputToolbar {...props} /> : null;
+  }
+
   // add new messages to db
   const onSend = (newMessages) => {
     addDoc(collection(db, "messages"), newMessages[0]);
@@ -123,6 +128,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
         messages={messages}
         onSend={messages => onSend(messages)}
         renderBubble={renderBubble}
+        renderInputToolbar={renderInputToolbar}
         user={{
           _id: userID,
           name: name
