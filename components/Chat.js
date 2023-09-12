@@ -24,7 +24,8 @@ const Chat = ({db, route, navigation, isConnected}) => {
     const dbQuery = query(collection(db, "messages"), orderBy("createdAt", "desc"));
 
     // get data from collection snapshot
-    const unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
+    if (isConnected === true) {
+      const unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
       const messages = [];
       documentsSnapshot.forEach((document) => {
         messages.push({
@@ -35,7 +36,11 @@ const Chat = ({db, route, navigation, isConnected}) => {
         })
       })
       setMessages(messages);
-    });
+      cacheUserMessages(messages);
+      });
+    } else {
+      loadCachedMessages();
+    }
 
     // unsubscribe to prevent memory leaks
     return () => {
@@ -50,6 +55,12 @@ const Chat = ({db, route, navigation, isConnected}) => {
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  // load messages from AsyncStorage
+  const loadCachedMessages = async () => {
+    const cachedMessages = await AsyncStorage.getItem("user_messages") || [];
+    setMessages(JSON.parse(cachedMessages));
   }
 
   // set initial message following Gifted Chat message object format
