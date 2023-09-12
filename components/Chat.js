@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
-const Chat = ({db, route, navigation}) => {
+const Chat = ({db, route, navigation, isConnected}) => {
   // get name and color data from Start component
   const { name } = route.params;
   const {color} = route.params;
