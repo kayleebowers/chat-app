@@ -2,6 +2,7 @@ import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Chat = ({db, route, navigation, isConnected}) => {
   // get name and color data from Start component
@@ -42,6 +43,14 @@ const Chat = ({db, route, navigation, isConnected}) => {
     }
   }, []);
 
+  // add messages to AsyncStorage 
+  const cacheUserMessages = async (chatsToCache) => {
+    try {
+      await AsyncStorage.setItem("user_messages", JSON.stringify(chatsToCache));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   // set initial message following Gifted Chat message object format
   // useEffect(() => {
