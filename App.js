@@ -1,10 +1,12 @@
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, disableNetwork, enableNetwork } from "firebase/firestore";
 import Start from "./components/Start";
 import Chat from "./components/Chat";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { useEffect } from "react";
 
 // create navigator to return object with Navigator and Screen components
 const Stack = createNativeStackNavigator();
@@ -26,6 +28,19 @@ const App = () => {
 
   // initialize Cloud Firestore
   const db = getFirestore(app);
+
+  // define state for connection status 
+  const connectionStatus = useNetInfo();
+
+  // disable Firestore without connection and vice versa
+  useEffect(() => {
+    if (connectionStatus.isConnected === false) {
+      Alert.alert("Connection lost!");
+      disableNetwork(db);
+    } else if (connectionStatus.isConnected === true) {
+      enableNetwork(db);
+    }
+  }, [connectionStatus.isConnected]);
 
   return (
     <NavigationContainer>
