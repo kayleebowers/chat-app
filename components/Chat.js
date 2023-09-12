@@ -109,7 +109,9 @@ const Chat = ({db, route, navigation, isConnected}) => {
 
   // only show inputToolbar with connection
   const renderInputToolbar = (props) => {
-    (isConnected) ? <InputToolbar {...props} /> : null;
+    if (isConnected === true) {
+      return <InputToolbar {...props} /> 
+    } else return null;
   }
 
   // add new messages to db
