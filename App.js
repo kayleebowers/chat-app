@@ -47,7 +47,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen name="Start" component={Start}/>
         <Stack.Screen name="Chat">
-          {props => <Chat db={db} {...props} />}
+          {props => <Chat db={db} isConnected={connectionStatus.isConnected} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
