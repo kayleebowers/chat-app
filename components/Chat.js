@@ -18,14 +18,20 @@ const Chat = ({db, route, navigation, isConnected}) => {
   // set message state
   const [messages, setMessages] = useState([]);
   
+  // variable to properly disable old listeners and prevent memory leaks
+  let unsubMessages;
+
   // send and store messages through Firestore database
   useEffect(() => {
-    // make database query
-    const dbQuery = query(collection(db, "messages"), orderBy("createdAt", "desc"));
-
     // get data from collection snapshot
     if (isConnected === true) {
-      const unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
+      // deregister current onSnapshot() listener to avoid registering multiple listeners
+      if (unsubMessages) unsubMessages();
+      unsubMessages = null;
+
+      // make database query
+      const dbQuery = query(collection(db, "messages"), orderBy("createdAt", "desc"));
+      unsubMessages = onSnapshot(dbQuery, (documentsSnapshot) => {
       const messages = [];
       documentsSnapshot.forEach((document) => {
         messages.push({
@@ -46,7 +52,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
     return () => {
       if (unsubMessages) unsubMessages();
     }
-  }, []);
+  }, [isConnected]);
 
   // add messages to AsyncStorage 
   const cacheUserMessages = async (chatsToCache) => {
