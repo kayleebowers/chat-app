@@ -1,11 +1,35 @@
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
 const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
+  // get reference to GiftedChat's ActionSheet
+  const actionSheet = useActionSheet();
+
   const onActionPress = () => {
     // define items to display in ActionSheet
     const options = ["Choose From Library", "Take Picture", "Send Location", "Cancel"];
+    // locate cancel button
     const cancelButtonIndex = options.length - 1;
+    actionSheet.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex
+      },
+      async (buttonIndex) => {
+        switch(buttonIndex) {
+          case 0: 
+            console.log('user wants to pick an image');
+            return;
+          case 1:
+            console.log('user wants to take a photo');
+            return;
+          case 2:
+            console.log('user wants to get their location');
+          default: 
+        }
+      }
+    )
   };
 
   return (
