@@ -122,6 +122,11 @@ const Chat = ({db, route, navigation, isConnected}) => {
     // setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
   // };
 
+  // render CustomActions component in chat
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />
+  }
+  
   return (
     <View style={[styles.container, {backgroundColor: color}]}>
       <GiftedChat
@@ -133,6 +138,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
           _id: userID,
           name: name
         }}
+        renderActions={renderCustomActions}
       />
       {/* ensure Android keyboards don't cover user input */}
       { Platform.OS === "android" ? <KeyboardAvoidingView behavior="height" /> : null}
