@@ -4,6 +4,7 @@
         "firebaseapp",
         "Firestore",
         "Millis",
+        "netinfo",
         "Pressable",
         "unsub"
     ]

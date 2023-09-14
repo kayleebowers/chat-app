@@ -21,13 +21,13 @@ const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
       async (buttonIndex) => {
         switch(buttonIndex) {
           case 0: 
-            pickImage();
+            console.log(pickImage());
             return;
           case 1:
-            takePhoto();
+            console.log(takePhoto());
             return;
           case 2:
-            getLocation();
+            console.log(getLocation());
           default: 
         }
       }

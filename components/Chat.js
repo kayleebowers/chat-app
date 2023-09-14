@@ -8,18 +8,16 @@ import MapView from 'react-native-maps';
 
 const Chat = ({db, route, navigation, isConnected}) => {
   // get name and color data from Start component
-  const { name } = route.params;
-  const {color} = route.params;
-  const {userID} = route.params;
+  const { name, color, userID } = route.params;
+
+  // set message state
+  const [messages, setMessages] = useState([]);
 
   // pass name to navigation title once right after component is mounted
   useEffect(() => {
     navigation.setOptions({title: name});
   }, []);
 
-  // set message state
-  const [messages, setMessages] = useState([]);
-  
   // variable to properly disable old listeners and prevent memory leaks
   let unsubMessages;
 
@@ -149,7 +147,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
             longitudeDelta: 0.0421,
           }}
         />
-      )
+      );
     }
     return null;
   }
