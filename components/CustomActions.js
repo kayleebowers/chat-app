@@ -2,7 +2,11 @@ import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
 const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
-  const onActionPress = () => {};
+  const onActionPress = () => {
+    // define items to display in ActionSheet
+    const options = ["Choose From Library", "Take Picture", "Send Location", "Cancel"];
+    const cancelButtonIndex = options.length - 1;
+  };
 
   return (
     <TouchableOpacity style={styles.container} onPress={onActionPress}>
