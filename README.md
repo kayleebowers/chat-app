@@ -13,7 +13,22 @@ Let's Chat is a mobile application built using React Native and the Gifted Chat 
 * Users are authenticated anonymously via Google Firebase authentication
 
 ## Get The Project Running
-Let's Chat can be downloaded locally and started with `npm start` or `expo start`.
+Let's Chat can be downloaded locally and started with `npm start` or `expo start`. The project does rely on Firebase and uses Expo and Android/iOS simulators for development. See further instructions on setting up those resources below.
+
+### Setting up Expo 
+Visit the [Expo website]("https://expo.dev/") and create an account. Download the Expo app on your phone, login, and test directly from there by selecting "i" for an iOS device and "a" for an Android device after running `npm start`. 
+
+### Setting up Firebase
+Create your own [Firebase]("https://firebase.google.com/") account and navigate to the console. Add a project with your app name and click on "Build" following by "Firestore Database." Set up your database in production mode and enable read/write functionalities in the rules section by changing `allow read, write: if false;` to true. Publish the changes, and head to project's the general settings. Under "Your apps," select webapp (</>) and follow the prompts.
+
+Copy the section of code starting with `const firebaseConfig =` and paste it into your application (see `App.js` for an example).
+
+### Setting up a device emulator
+#### Android Studio
+Download Android Studio Giraffe from the [Android website]("https://developer.android.com/studio") and follow the installation process. Then set up and install the device you would prefer to use for testing.
+
+#### iOS Emulator
+Download and install Xcode before installing the iOS Simulator. From there, you can open a virtual iOS device and view your project by clicking `i` when Expo is running in your terminal. 
 
 ## Technologies Used
 * React Native
