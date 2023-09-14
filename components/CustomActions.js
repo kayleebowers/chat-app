@@ -2,7 +2,7 @@ import { TouchableOpacity, StyleSheet, View, Text, Alert } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from 'expo-location';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
 const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID }) => {
@@ -69,6 +69,9 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
         const newUploadRef = ref(storage, uniqueRefString);
         uploadBytes(newUploadRef, blob).then(async (snapshot) => {
           console.log('File has been uploaded successfully');
+          // get remote image URL and send in message
+          const imageURL = await getDownloadURL(snapshot.ref);
+          onSend({ image: imageURL })
         })
       } else Alert.alert("Permissions haven't been granted.");
     }
