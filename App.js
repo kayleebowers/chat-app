@@ -7,6 +7,7 @@ import Start from "./components/Start";
 import Chat from "./components/Chat";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { useEffect } from "react";
+import { getStorage } from "firebase/storage";
 
 // create navigator to return object with Navigator and Screen components
 const Stack = createNativeStackNavigator();
@@ -23,8 +24,9 @@ const App = () => {
     appId: "1:820030470933:web:1faf8f6b9706ee6759871c"
   };
 
-  // initialize Firebase
+  // initialize Firebase and Firebase Storage handlers
   const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
 
   // initialize Cloud Firestore
   const db = getFirestore(app);
@@ -47,7 +49,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Start">
         <Stack.Screen name="Start" component={Start}/>
         <Stack.Screen name="Chat">
-          {props => <Chat db={db} isConnected={connectionStatus.isConnected} {...props} />}
+          {props => <Chat db={db} isConnected={connectionStatus.isConnected} storage={storage} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
