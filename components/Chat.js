@@ -127,7 +127,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
   // render CustomActions component in chat
   const renderCustomActions = (props) => {
     // passing props so the action can be customized (includes onSend() method)
-    return <CustomActions storage={storage} {...props} />
+    return <CustomActions storage={storage} userID={userID} {...props} />
   }
 
   // render CustomView with MapView if there's location data 

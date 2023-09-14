@@ -5,7 +5,7 @@ import * as Location from 'expo-location';
 import { ref, uploadBytes } from 'firebase/storage';
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
-const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage }) => {
+const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID }) => {
   // get reference to GiftedChat's ActionSheet
   const actionSheet = useActionSheet();
 
@@ -60,16 +60,25 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage }) => {
       let result = await ImagePicker.launchImageLibraryAsync();
       if (!result.canceled) {
         const imageURI = result.assets[0].uri;
+        // generate unique string reference so storage accepts multiple files
+        const uniqueRefString = generateReference(imageURI);
         // convert imageURI into blob for Firebase Storage
         const response = await fetch(imageURI);
         const blob = await response.blob();
         // create image reference and upload
-        const newUploadRef = ref(storage, "image123");
+        const newUploadRef = ref(storage, uniqueRefString);
         uploadBytes(newUploadRef, blob).then(async (snapshot) => {
           console.log('File has been uploaded successfully');
         })
       } else Alert.alert("Permissions haven't been granted.");
     }
+  }
+
+  // generate unique string reference for each added photo
+  const generateReference = (uri) => {
+    const timeStamp = (new Date()).getTime();
+    const imageName = uri.split("/")[uri.split("/").length - 1];
+    return `${userID}-${timeStamp}-${imageName}`;
   }
 
   return (
