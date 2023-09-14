@@ -127,6 +127,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
 
   // render CustomActions component in chat
   const renderCustomActions = (props) => {
+    // passing props so the action can be customized
     return <CustomActions {...props} />
   }
 
