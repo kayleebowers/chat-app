@@ -21,10 +21,10 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
       async (buttonIndex) => {
         switch(buttonIndex) {
           case 0: 
-            console.log(pickImage());
+            pickImage();
             return;
           case 1:
-            console.log(takePhoto());
+            takePhoto();
             return;
           case 2:
             getLocation();
@@ -48,6 +48,22 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
         });
       } else Alert.alert("Permissions haven't been granted.");
     } else Alert.alert("Error occurred while fetching location");
+  }
+
+  // pick image
+  const pickImage = async () => {
+    // get permission to access photo library
+    let permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissions?.granted) {
+      // let user select photo
+      let result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.canceled) {
+        const imageURI = result.assets[0].uri;
+        // convert imageURI into blob for Firebase Storage
+        const response = await fetch(imageURI);
+        const blob = await response.blob();
+      } else Alert.alert("Permissions haven't been granted.");
+    }
   }
 
   return (
