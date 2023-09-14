@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import CustomActions from "./components/CustomActions";
+import CustomActions from "./CustomActions";
 
 const Chat = ({db, route, navigation, isConnected}) => {
   // get name and color data from Start component
