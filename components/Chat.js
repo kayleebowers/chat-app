@@ -4,6 +4,7 @@ import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CustomActions from "./CustomActions";
+import MapView from 'react-native-maps';
 
 const Chat = ({db, route, navigation, isConnected}) => {
   // get name and color data from Start component
@@ -131,6 +132,28 @@ const Chat = ({db, route, navigation, isConnected}) => {
     return <CustomActions {...props} />
   }
 
+  // render CustomView with MapView if there's location data 
+  const renderCustomView = (props) => {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3}}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      )
+    }
+    return null;
+  }
+
   return (
     <View style={[styles.container, {backgroundColor: color}]}>
       <GiftedChat
@@ -143,6 +166,7 @@ const Chat = ({db, route, navigation, isConnected}) => {
           name: name
         }}
         renderActions={renderCustomActions}
+        renderCustomView={renderCustomView}
       />
       {/* ensure Android keyboards don't cover user input */}
       { Platform.OS === "android" ? <KeyboardAvoidingView behavior="height" /> : null}
