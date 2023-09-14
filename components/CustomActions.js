@@ -1,5 +1,7 @@
 import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import * as ImagePicker from "expo-image-picker";
+import * as Location from 'expo-location';
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
 const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
