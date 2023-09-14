@@ -60,19 +60,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
       let result = await ImagePicker.launchImageLibraryAsync();
       if (!result.canceled) {
         const imageURI = result.assets[0].uri;
-        // generate unique string reference so storage accepts multiple files
-        const uniqueRefString = generateReference(imageURI);
-        // convert imageURI into blob for Firebase Storage
-        const response = await fetch(imageURI);
-        const blob = await response.blob();
-        // create image reference and upload
-        const newUploadRef = ref(storage, uniqueRefString);
-        uploadBytes(newUploadRef, blob).then(async (snapshot) => {
-          console.log('File has been uploaded successfully');
-          // get remote image URL and send in message
-          const imageURL = await getDownloadURL(snapshot.ref);
-          onSend({ image: imageURL })
-        })
+        uploadAndSendImage(imageURI);
       } else Alert.alert("Permissions haven't been granted.");
     }
   }
@@ -82,6 +70,23 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     const timeStamp = (new Date()).getTime();
     const imageName = uri.split("/")[uri.split("/").length - 1];
     return `${userID}-${timeStamp}-${imageName}`;
+  }
+
+  // upload and send image as message
+  const uploadAndSendImage = async (imageURI) => {
+    // generate unique string reference so storage accepts multiple files
+    const uniqueRefString = generateReference(imageURI);
+    // convert imageURI into blob for Firebase Storage
+    const response = await fetch(imageURI);
+    const blob = await response.blob();
+    // create image reference and upload
+    const newUploadRef = ref(storage, uniqueRefString);
+    uploadBytes(newUploadRef, blob).then(async (snapshot) => {
+      console.log('File has been uploaded successfully');
+      // get remote image URL and send in message
+      const imageURL = await getDownloadURL(snapshot.ref);
+      onSend({ image: imageURL })
+    })
   }
 
   return (
