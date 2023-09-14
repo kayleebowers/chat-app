@@ -1,27 +1,38 @@
 import { TouchableOpacity, StyleSheet, View, Text, Alert } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as ImagePicker from "expo-image-picker";
-import * as Location from 'expo-location';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import * as Location from "expo-location";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // wrapperStyle and iconTextStyle are default props from Gifted Chat
-const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID }) => {
+const CustomActions = ({
+  wrapperStyle,
+  iconTextStyle,
+  onSend,
+  storage,
+  userID,
+}) => {
   // get reference to GiftedChat's ActionSheet
   const actionSheet = useActionSheet();
 
   const onActionPress = () => {
     // define items to display in ActionSheet
-    const options = ["Choose From Library", "Take Picture", "Send Location", "Cancel"];
+    const options = [
+      "Choose From Library",
+      "Take Picture",
+      "Send Location",
+      "Cancel",
+    ];
     // locate cancel button
     const cancelButtonIndex = options.length - 1;
     actionSheet.showActionSheetWithOptions(
       {
         options,
-        cancelButtonIndex
+        cancelButtonIndex,
       },
       async (buttonIndex) => {
-        switch(buttonIndex) {
-          case 0: 
+        switch (buttonIndex) {
+          case 0:
             pickImage();
             return;
           case 1:
@@ -29,10 +40,10 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
             return;
           case 2:
             getLocation();
-          default: 
+          default:
         }
       }
-    )
+    );
   };
 
   // get location data
@@ -45,11 +56,11 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
           location: {
             longitude: location.coords.longitude,
             latitude: location.coords.latitude,
-          }
+          },
         });
       } else Alert.alert("Permissions haven't been granted.");
     } else Alert.alert("Error occurred while fetching location");
-  }
+  };
 
   // pick image
   const pickImage = async () => {
@@ -63,7 +74,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
         uploadAndSendImage(imageURI);
       } else Alert.alert("Permissions haven't been granted.");
     }
-  }
+  };
 
   // take photo
   const takePhoto = async () => {
@@ -72,14 +83,14 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
       let result = await ImagePicker.launchCameraAsync();
       if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
     } else Alert.alert("Permissions haven't been granted.");
-  }
+  };
 
   // generate unique string reference for each added photo
   const generateReference = (uri) => {
-    const timeStamp = (new Date()).getTime();
+    const timeStamp = new Date().getTime();
     const imageName = uri.split("/")[uri.split("/").length - 1];
     return `${userID}-${timeStamp}-${imageName}`;
-  }
+  };
 
   // upload and send image as message
   const uploadAndSendImage = async (imageURI) => {
@@ -91,15 +102,20 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     // create image reference and upload
     const newUploadRef = ref(storage, uniqueRefString);
     uploadBytes(newUploadRef, blob).then(async (snapshot) => {
-      console.log('File has been uploaded successfully');
+      console.log("File has been uploaded successfully");
       // get remote image URL and send in message
       const imageURL = await getDownloadURL(snapshot.ref);
-      onSend({ image: imageURL })
-    })
-  }
+      onSend({ image: imageURL });
+    });
+  };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onActionPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onActionPress}
+      accessibilityLabel="Press for more options"
+      accessibilityHint="Add or take a photo or send your location"
+    >
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
