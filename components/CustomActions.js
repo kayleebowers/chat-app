@@ -65,6 +65,15 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     }
   }
 
+  // take photo
+  const takePhoto = async () => {
+    let permissions = await ImagePicker.requestCameraPermissionsAsync();
+    if (permissions?.granted) {
+      let result = await ImagePicker.launchCameraAsync();
+      if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
+    } else Alert.alert("Permissions haven't been granted.");
+  }
+
   // generate unique string reference for each added photo
   const generateReference = (uri) => {
     const timeStamp = (new Date()).getTime();
