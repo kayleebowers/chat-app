@@ -83,7 +83,7 @@ const CustomActions = ({
       let result = await ImagePicker.launchCameraAsync();
       if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
     } else Alert.alert("Permissions haven't been granted.");
-  };
+  }
 
   // generate unique string reference for each added photo
   const generateReference = (uri) => {
