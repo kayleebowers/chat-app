@@ -43,3 +43,13 @@ Download and install Xcode before installing the iOS Simulator. From there, you 
 * React Native Maps
 
 ## Screenshots
+### Welcome Screen
+[![Homesrceen.png](https://i.postimg.cc/SKDd1HdF/Homesrceen.png)](https://postimg.cc/674CyjFY)
+### Chat Screen
+[![Other-color-chat.png](https://i.postimg.cc/JnFqMJSp/Other-color-chat.png)](https://postimg.cc/njv71sFm)
+### Screen Color Change
+[![Chat-screen.png](https://i.postimg.cc/rzXNtTVW/Chat-screen.png)](https://postimg.cc/rRjrvvtF)
+### Cloud Firestore (message storage)
+[![Cloud-Firestore.png](https://i.postimg.cc/DwcRFj65/Cloud-Firestore.png)](https://postimg.cc/LJnx3VrZ)
+### Firebase Storage (photo file storage)
+[![Firebase-Storage.png](https://i.postimg.cc/ZqK2q8Dm/Firebase-Storage.png)](https://postimg.cc/nXg0RDJS)
